@@ -1,5 +1,5 @@
 # Animated Gradient
-Moving gradients using vanilla js.
+Moving gradients using js.
 
 
 http://www.mnl.space/Animated-Gradient/
@@ -14,8 +14,9 @@ Deploying using Github Pages in the repo settings:
 
 
 ### References
-- https://htmlcolorcodes.com
-- https://developer.mozilla.org/en-US/docs/Games/Tutorials/2D_Breakout_game_pure_JavaScript
+- https://github.com/enyancc/vscode-ext-color-highlight
+- https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createLinearGradient
+- https://developer.mozilla.org/en-US/docs/Web/API/CanvasGradient/addColorStop
 - https://en.wikipedia.org/wiki/Middleware
 - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/extends
 - https://developer.mozilla.org/en-US/docs/Glossary/Middleware
