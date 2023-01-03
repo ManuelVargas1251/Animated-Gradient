@@ -4,7 +4,7 @@ Moving gradients using js.
 
 http://www.mnl.space/Animated-Gradient/
 
-![Animated-Art-III](Animated-Gradient.gif)
+![Animated-Gradient](Animated-Gradient.gif)
 
 
 ## Site Deployment
@@ -15,6 +15,7 @@ Deploying using Github Pages in the repo settings:
 
 ### References
 - https://github.com/enyancc/vscode-ext-color-highlight
+- https://developer.mozilla.org/en-US/docs/Web/API/Element/classList
 - https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/createLinearGradient
 - https://developer.mozilla.org/en-US/docs/Web/API/CanvasGradient/addColorStop
 - https://en.wikipedia.org/wiki/Middleware

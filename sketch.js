@@ -12,9 +12,13 @@ animationSpeed = .1
 mousePressed = false
 touchPressed = false
 clickLimit = 50
+touchClientX = undefined
+touchClientY = undefined
+mouseClientX = undefined
+mouseClientY = undefined
 
 // create background object
-const backgroundGradient = new gradientBackground(10, -11, 666, 0,'#0036c4','#071f5f')
+const backgroundGradient = new gradientBackground(10, -11, 666, 0, '#0036c4', '#071f5f')
 
 // create gradient square object 
 const newSquare = new gradientSquare(10, 10, 666, 0, '#0036c4', '#00FF00')
@@ -34,6 +38,11 @@ addEventListener('mouseup', (event) => {
     // console.info('mouse released', event)
     mousePressed = false
 })
+addEventListener('mousemove', (event) => {
+    mouseClientX = event.clientX
+    mouseClientY = event.clientY
+    // console.info('mouse moved', event.clientX, event.clientY)
+});
 addEventListener('touchstart', (event) => {
     // console.info('touch pressed', event)
     touchPressed = true
@@ -42,25 +51,29 @@ addEventListener('touchend', (event) => {
     // console.info('touch released', event)
     touchPressed = false
 })
-// addEventListener('touchmove', (event) => {
-//     // console.info('touch moved', event)
-//     touchMove = true
-// })
+addEventListener('touchmove', (event) => {
+    // console.info('touch moved', event)
+    // console.info('touch moved', event.touches[0].clientX, event.touches[0].clientY)
+    touchClientX = event.touches[0].clientX
+    touchClientY = event.touches[0].clientY
+    //touchMove = true
+})
 
-// draw loop
+// draw loop    
 function draw() {
     const canvas = document.getElementById('canvas').getContext('2d')
-    
+
+    // canvas.requestFullscreen()
     // show all objects on canvas
     backgroundGradient.show(canvas)
     newSquare.show(canvas)
     whiteBorderCircle.show(canvas)
     myGradientCircle.show(canvas)
 
-  
-    if(!mousePressed && !touchPressed){
+
+    if (!mousePressed && !touchPressed) {
         tealCircle.show(canvas)
-    }else{
+    } else {
         tealCircle.show(canvas, true, '#FFFF00', '#FF00FF')
         //--clickLimit
     }
@@ -68,7 +81,7 @@ function draw() {
 
     // listens for border collisions to keep objects inside canvas
     borderWaiter(canvas)
-    
+
     // if(clickLimit <= 0){
     //     console.info('click limit reached')
     //     clickLimit = 0
@@ -78,17 +91,32 @@ function draw() {
     // when the circle in the correct color is placed on the impressions, they
 
     // flash toggle the teal circle after 9999 ms
-    setTimeout(function(){  
-        tealCircle.show(canvas, true, '#FFFF00', '#FF00FF')
+    setTimeout(function () {
+        // tealCircle.show(canvas, true, '#FFFF00', '#FF00FF')
+        myGradientCircle.show(canvas, true, '#FF00FF', '#FFFF00')
         // console.info('TIMEOUT! ')
     }, 9999);
+
+    // display element borders
+    // testInterface(canvas)
 
 }
 let myInterval = setInterval(draw, animationSpeed);
 
+function testInterface(canvas) {
+    // Draw rect
+    //canvas.fillStyle = '#000000'
+    canvas.strokeStyle = "#FFF"
+    canvas.stroke()
+    canvas.fillRect(0, 0, canvas.canvas.width, canvas.canvas.height)
+
+    // // Draw circle
+    // canvas.fillStyle = '#000000'
+    // canvas.beginPath()
+}
 
 // function to stop the animation
-function gameOver(canvas){
+function gameOver(canvas) {
     // console.log('GAME OVER')
     // Fill RED WITH WHITE GAMEOVER TEXT
     // canvas.fillStyle = 
@@ -101,7 +129,7 @@ function gameOver(canvas){
     // startAnimation()
     //
 }
-function borderWaiter(canvas){
+function borderWaiter(canvas) {
     // INCRE/DECRE TARGET X POSITION
     // check shape location and toggle direction
     // initial x+ push
@@ -116,7 +144,7 @@ function borderWaiter(canvas){
     } else if (leftWallHit && !rightWallHit) {
         x += dx
         rightWallHit = false
-        
+
     }
 
     // initial y+ push

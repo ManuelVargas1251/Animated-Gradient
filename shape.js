@@ -1,6 +1,5 @@
 class gradientShape {
     constructor(xGradient, yGradient, wGradient, hGradient, leftColor, rightColor, initX, initY, stokeBool) {
-        //super(x, x)
         this.x = xGradient
         this.y = yGradient
         this.w = wGradient
@@ -40,20 +39,32 @@ class gradientCircle extends gradientShape {
     show(canvas, changeGradient, newLeftColor, newRightColor) {
         if (changeGradient === undefined) {
             canvas.fillStyle = this.getGradient(canvas)
+            // div.classList.toggle("visible",
         } else {
             canvas.fillStyle = this.changeGradient(newLeftColor, newRightColor, canvas)
         }
-
         canvas.strokeStyle = "#FFF"
+
         // create shape
-        canvas.beginPath();
-        // canvas.arc(x, this.initY, 120, 0, 2 * Math.PI);
-        canvas.arc(x, this.initY, 120, 0, 2 * Math.PI);
+        canvas.beginPath()
+        // draw on touch
+        if (touchPressed && touchClientX & touchClientY) {
+            canvas.arc(touchClientX, touchClientY, 120, 0, 2 * Math.PI)
+        // draw on mouse press
+        } else if (mousePressed && mouseClientX && mouseClientY) {
+            canvas.arc(mouseClientX, mouseClientY, 120, 0, 2 * Math.PI)
+        } else {
+            canvas.arc(x, this.initY, 120, 0, 2 * Math.PI);
+        }
+
+        // toggle outline or fill
         if (this.stroke) {
             canvas.stroke()
         } else {
             canvas.fill()
         }
+        // this.initY--
+        // this.initY += 0.1
         return 'complete'
     }
 }
